@@ -23,7 +23,7 @@ module.exports = {
   plugins: ['react', 'unicorn', 'promise', '@typescript-eslint'],
   rules: {
     'import/extensions': [
-      ERROR,
+      'error',
       'ignorePackages',
       {
         ts: 'never',
@@ -32,6 +32,7 @@ module.exports = {
         js: 'never',
       },
     ],
+    semi: 'off',
   },
   settings: {
     'import/resolver': {
