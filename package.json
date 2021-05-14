@@ -38,9 +38,12 @@
   },
   "homepage": "https://github.com/akarishiki-pumpkin/pumpkin-cli#readme",
   "devDependencies": {
+    "@babel/core": "7.14.2",
+    "@babel/preset-react": "7.13.13",
     "@typescript-eslint/eslint-plugin": "4.23.0",
     "@typescript-eslint/parser": "4.23.0",
     "autoprefixer": "10.2.5",
+    "babel-loader": "8.2.2",
     "clean-webpack-plugin": "4.0.0-alpha.0",
     "cross-env": "7.0.3",
     "css-loader": "5.2.4",
@@ -71,7 +74,10 @@
     "webpack-dev-server": "3.11.2",
     "webpack-merge": "5.7.3"
   },
-  "dependencies": {},
+  "dependencies": {
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
