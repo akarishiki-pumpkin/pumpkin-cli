@@ -1,7 +1,8 @@
 const path = require('path')
 const { isDev, PROJECT_PATH } = require('../constant')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-
+// const CopyPlugin = require('copy-webpack-plugin')
+const WebpackBar = require('webpackbar')
 const getCssLoaders = (importLoaders) => [
   'style-loader',
   {
@@ -41,6 +42,13 @@ module.exports = {
     filename: `js/[name]${isDev ? '' : '.[hash:8]'}.js`,
     path: path.resolve(PROJECT_PATH, './dist'),
   },
+  resolve: {
+    alias:{
+      '@': path.resolve(PROJECT_PATH, './src'),
+    },
+     
+    extensions: ['.tsx', '.ts', '.js', '.json'],
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(PROJECT_PATH, './public/index.html'),
@@ -63,6 +71,27 @@ module.exports = {
             useShortDoctype: true,
           },
     }),
+    // new CopyPlugin({
+    //   patterns: [
+    //     {
+    //       context: path.resolve(PROJECT_PATH, './public'),
+    //       from: '*',
+    //       to: path.resolve(PROJECT_PATH, './dist'),
+    //       toType: 'dir',
+    //       globOptions: {
+    //         dot: true,
+    //         gitignore: true,
+    //         ignore: ["index.html"],
+    //       }
+    //     },
+    //   ],
+    // }),
+  	new WebpackBar({
+      name: isDev ? '正在启动南瓜脚手架' : '正在打包',
+      color: '#fa8c16',
+    }),
+    
+
   ],
   module: {
     rules: [
@@ -81,6 +110,12 @@ module.exports = {
             },
           },
         ],
+      },
+      {
+        test: /\.(tsx?|js)$/,
+        loader: 'babel-loader',
+        options: { cacheDirectory: true },
+        exclude: /node_modules/,
       },
       {
         test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
@@ -109,5 +144,6 @@ module.exports = {
       },
     ],
   },
+
   target: process.env.NODE_ENV === 'development' ? 'web' : 'browserslist',
 }
